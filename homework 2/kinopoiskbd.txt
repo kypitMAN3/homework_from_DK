@@ -1,0 +1,60 @@
+CREATE TABLE film
+(
+	film_id int PRIMARY KEY,
+	film_name text NOT NULL,
+	production_year int NOT NULL,
+	country text NOT NULL,
+	tagline text NOT NULL,
+	fk_director_id int REFERENCES person(person_id) NOT NULL,
+	fk_screenwriter_id int REFERENCES person(person_id) NOT NULL,
+	fk_producer_id int REFERENCES person(person_id) NOT NULL,
+	fk_cameraman_id int REFERENCES person(person_id) NOT NULL,
+	fk_composer_id int REFERENCES person(person_id) NOT NULL,
+	fk_productdesigner_id int REFERENCES person(person_id) NOT NULL,
+	fk_editor_id int REFERENCES person(person_id) NOT NULL,
+	box_office_USA int NOT NULL,
+	box_office_world int NOT NULL,
+	premiere_Russia date NOT NULL,
+	premiere_world date NOT NULL,
+	dvd_release date NOT NULL,
+	certificate_ru int NOT NULL,
+	certificate_pegi varchar NOT NULL,
+	duration_minutes int NOT NULL
+);
+
+CREATE TABLE person
+(
+	person_id int PRIMARY KEY,
+	person_fullname text NOT NULL
+);
+
+CREATE TABLE genre
+(
+	genre_id int PRIMARY KEY,
+	genre_name text NOT NULL
+);
+
+CREATE TABLE viewers
+(
+	viewer_id int PRIMARY KEY,
+	country text NOT NULL,
+	total_viewers int NOT NULL
+);
+
+CREATE TABLE film_starring
+(
+	film_id int REFERENCES film(film_id) NOT NULL,
+	actor_id int REFERENCES person(person_id) NOT NULL
+);
+
+CREATE TABLE film_dubbing
+(
+	film_id int REFERENCES film(film_id) NOT NULL,
+	vocice_actor_id int REFERENCES person(person_id) NOT NULL
+);
+
+CREATE TABLE film_viewers
+(
+	film_id int REFERENCES film(film_id) NOT NULL,
+	viewer_id int REFERENCES viewers(viewer_id) NOT NULL
+);
