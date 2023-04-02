@@ -5,9 +5,6 @@ class GenreController {
         const {genre_name} = req.body;
         console.log(genre_name);
         res.json('ok')
-        // const newGenre = await db.query("INSERT INTO genre(genre_name) values ($1) RETURNING *", [genre_name]);
-
-        // res.json(newGenre);
     }
 
     async getGenres(req, res) {
